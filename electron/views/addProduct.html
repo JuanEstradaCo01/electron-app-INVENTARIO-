@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/addProduct.css">
+    <title>Agregar producto</title>
+</head>
+
+<body>
+    <h1>Agregar producto</h1>
+
+    <form id="formAddProduct">
+        <label for="name">Nombre</label>
+        <input name="name" type="text" id="name" placeholder="Nombre del producto" required autofocus>
+
+        <label for="type">Categoria</label>
+        <select id="category" name="type" required>
+            <option value="null" hidden selected>Selecciona una opcion</option>
+            <option value="fruta">Fruta</option>
+            <option value="verdura">Verdura</option>
+            <option value="aseo">Aseo</option>
+            <option value="licor">Licor</option>
+            <option value="heladeria">Heladeria</option>
+        </select>
+
+        <label for="quantity">Cantidad</label>
+        <input type="number" name="quantity" id="quantity" placeholder="Cantidad de unidades" required>
+
+        <label for="price">Price</label>
+        <input type="number" name="price" id="price" placeholder="Precio" required>
+
+        <button type="submit">Agregar</button>
+    </form>
+</body>
+<script src="./script.js"></script>
+
+</html>
