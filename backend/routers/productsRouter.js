@@ -54,6 +54,7 @@ productRouter.post("/addProduct", async (req, res) => {
 
         const newProduct = req.body
         newProduct.id = products.length + 1
+        newProduct.name = newProduct.name.toUpperCase();
 
         await productDao.addProduct(newProduct)
 

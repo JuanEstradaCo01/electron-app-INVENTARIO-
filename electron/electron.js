@@ -11,8 +11,8 @@ let newProductWindow
 //app.disableHardwareAcceleration();
 
 //Ventana principal
-app.on("ready", () => {
 
+app.on("ready", () => {
     mainWindow = new BrowserWindow({
         title: "Inventario",
         width: 800,
@@ -43,6 +43,7 @@ app.on("ready", () => {
     mainWindow.on("closed", () => {
         app.quit()
     })
+
 });
 
 //Menus
@@ -55,6 +56,17 @@ const menuArray = [
                 accelerator: "Ctrl + N",
                 click() {
                     addNewProductWindow()
+                }
+            }
+        ]
+    },
+    {
+        label: "Refresh",
+        submenu: [
+            {
+                label: "Refresh",
+                accelerator: "F5",
+                click() {
                 }
             }
         ]

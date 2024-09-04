@@ -3,3 +3,25 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+h1{
+    text-align: center;
+    margin: 3rem auto;
+    color: green;
+    font-weight: bolder;
+    font-family: cursive;
+}
+
+table {
+    margin: auto;
+    width: 65%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+th {
+    background-color: #f2f2f2;
+}

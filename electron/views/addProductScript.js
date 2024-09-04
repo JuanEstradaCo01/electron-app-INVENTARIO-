@@ -1,5 +1,3 @@
-const products = document.querySelector("#products");
-
 let form = document.getElementById("formAddProduct");
 
 form.addEventListener("submit", async (e) => {
@@ -16,6 +14,19 @@ form.addEventListener("submit", async (e) => {
         quantity: quantity,
         price: price
     }
+
+    fetch(`https://electron-app-inventario.onrender.com/addProduct`, {
+        method: "POST", 
+        body: JSON.stringify(newProduct), 
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log({data})
+        })
+        .catch((error) => console.error("Error:", error));
 
     form.reset()
 });
