@@ -14,23 +14,23 @@
     <form id="formAddProduct">
         <label for="name">Nombre</label>
         <input name="name" type="text" id="name" placeholder="Nombre del producto" required autofocus>
-
-        <label for="type">Categoria</label>
+    
+        <label for="type">Categoría</label>
         <select id="category" name="type" required>
-            <option value="null" hidden selected>Selecciona una opcion</option>
+            <option value="null" hidden selected>Selecciona una opción</option>
             <option value="fruta">Fruta</option>
             <option value="verdura">Verdura</option>
             <option value="aseo">Aseo</option>
             <option value="licor">Licor</option>
-            <option value="heladeria">Heladeria</option>
+            <option value="heladería">Heladería</option>
         </select>
-
+    
         <label for="quantity">Cantidad</label>
-        <input type="tel" name="quantity" id="quantity" placeholder="Cantidad de unidades" required>
-
-        <label for="price">Price</label>
+        <input type="number" name="quantity" id="quantity" placeholder="Cantidad de unidades" required>
+    
+        <label for="price">Precio</label>
         <input type="text" name="price" id="price" placeholder="Precio" required>
-
+    
         <button type="submit">Agregar</button>
     </form>
 </body>

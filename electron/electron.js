@@ -19,11 +19,8 @@ app.on("ready", () => {
 function createMainWindow() {
     mainWindow = new BrowserWindow({
         title: "Inventario",
-        width: 800,
-        height: 600,
-        webPreferences: {
-            nodeIntegration: true,
-        }
+        width: 1000,
+        height: 700
     });
 
     fetch(`https://electron-app-inventario.onrender.com/products`)
@@ -31,7 +28,7 @@ function createMainWindow() {
         .then(data => {
             showMainWindow();
         })
-        .catch((error) => console.error("Error al consultar los productos de la DB"));
+        .catch((error) => console.error("Error al consultar los productos de la DB", error));
 
     function showMainWindow() {
         mainWindow.loadURL(url.format({
@@ -104,25 +101,27 @@ function loadView(window, view) {
         pathname: path.join(__dirname, `./views/${view}.html`),
         protocol: "file",
         slashes: true
-    }))
+    }));
 };
 
 //Ventana para agregar un producto
 function addNewProductWindow() {
     newProductWindow = new BrowserWindow({
-        width: 400,
-        height: 300,
+        width: "100vh",
+        height: "100vh",
         title: "Agregar un producto"
-    })
+    });
 
     loadView(newProductWindow, "addProduct")
 
     //Quitar menu de la ventana
-    newProductWindow.setMenu(null)
+    if (process.env.NODE_ENV === "production") {
+        newProductWindow.setMenu(null)
+    };
 
     newProductWindow.on("closed", () => {
         newProductWindow = null
-    })
+    });
 };
 
 //Valido si la plataforma es MacOs y configuro el menu

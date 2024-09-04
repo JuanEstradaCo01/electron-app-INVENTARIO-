@@ -1,3 +1,73 @@
 body {
-    background-color: red;
+    color: rgb(43, 43, 43);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    flex-direction: column;
+}
+
+h1{
+    font-family: cursive;
+    font-weight: bolder;
+    color: #318643;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Estilos responsive */
+@media (max-width: 600px) {
+    form {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    input, select {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+    }
 }
