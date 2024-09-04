@@ -13,13 +13,27 @@ let newProductWindow
 //Ventana principal
 
 app.on("ready", () => {
+    createMainWindow();
+});
+
+function createMainWindow() {
     mainWindow = new BrowserWindow({
         title: "Inventario",
         width: 800,
-        height: 600
-    })
+        height: 600,
+        webPreferences: {
+            nodeIntegration: true,
+        }
+    });
 
-    setTimeout(() => {
+    fetch(`https://electron-app-inventario.onrender.com/products`)
+        .then(response => response.json())
+        .then(data => {
+            showMainWindow();
+        })
+        .catch((error) => console.error("Error al consultar los productos de la DB"));
+
+    function showMainWindow() {
         mainWindow.loadURL(url.format({
             pathname: path.join(__dirname, `./views/index.html`),
             protocol: "file",
@@ -29,22 +43,20 @@ app.on("ready", () => {
         const mainMenu = Menu.buildFromTemplate(menuArray);
 
         Menu.setApplicationMenu(mainMenu)
-
-    }, 2500)
+    };
 
     mainWindow.setMenu(null);
 
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, `./views/iniciando.html`),
+        pathname: path.join(__dirname, `./views/loader.html`),
         protocol: "file",
         slashes: true
-    }))
+    }));
 
     mainWindow.on("closed", () => {
         app.quit()
-    })
-
-});
+    });
+};
 
 //Menus
 const menuArray = [
@@ -67,6 +79,7 @@ const menuArray = [
                 label: "Refresh",
                 accelerator: "F5",
                 click() {
+                    mainWindow.webContents.reload();
                 }
             }
         ]
@@ -105,7 +118,7 @@ function addNewProductWindow() {
     loadView(newProductWindow, "addProduct")
 
     //Quitar menu de la ventana
-    //newProductWindow.setMenu(null)
+    newProductWindow.setMenu(null)
 
     newProductWindow.on("closed", () => {
         newProductWindow = null
@@ -129,9 +142,6 @@ if (process.env.NODE_ENV !== "production") {
                 click(item, focusedWindow) {
                     focusedWindow.toggleDevTools()
                 }
-            },
-            {
-                role: "reload"
             }
         ]
     })

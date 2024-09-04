@@ -7,7 +7,7 @@ const productsSchema = mongoose.Schema({
     name: String,
     category: String,
     quantity: Number,
-    price: Number
+    price: String
 });
 
 export default mongoose.model(`${collection}`, productsSchema)

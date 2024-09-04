@@ -16,7 +16,7 @@ function pintarProducts(array) {
                 <td>${item.name}</td>
                 <td>${item.category}</td>
                 <td>${item.quantity}</td>
-                <td>$ ${item.price}</td>
+                <td><strong style="color: green;">$</strong> ${item.price}</td>
         `;
         // Insertamos el elemento en el DOM
         products.appendChild(tr);

@@ -55,6 +55,9 @@ productRouter.post("/addProduct", async (req, res) => {
         const newProduct = req.body
         newProduct.id = products.length + 1
         newProduct.name = newProduct.name.toUpperCase();
+        const format = new Intl.NumberFormat('de-DE');
+        const numberFormat = format.format(newProduct.price);
+        newProduct.price = numberFormat
 
         await productDao.addProduct(newProduct)
 
