@@ -10,15 +10,16 @@ body {
 }
 
 .loader {
-  width: 50px;
-  aspect-ratio: 1;
-  --_c:no-repeat radial-gradient(farthest-side,#00aa39 92%,#0000);
-  background: 
-    var(--_c) top,
-    var(--_c) left,
-    var(--_c) right,
-    var(--_c) bottom;
-  background-size: 12px 12px;
-  animation: l7 1s infinite;
+  width: fit-content;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 30px;
+  color: rgb(0, 168, 36);
+  padding: 0 5px 8px 0;
+  background: repeating-linear-gradient(90deg,currentColor 0 8%,#0000 0 10%) 200% 100%/200% 3px no-repeat;
+  animation: l3 2s steps(6) infinite;
 }
-@keyframes l7 {to{transform: rotate(.5turn)}}
+.loader:before {
+  content:"Iniciando"
+}
+@keyframes l3 {to{background-position: 80% 100%}}

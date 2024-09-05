@@ -20,10 +20,7 @@ function createMainWindow() {
     mainWindow = new BrowserWindow({
         title: "Inventario",
         width: 1000,
-        height: 700,
-        webPreferences: {
-            nodeIntegration: true
-        }
+        height: 700
     });
 
     fetch(`https://electron-app-inventario.onrender.com/products`)
@@ -61,18 +58,6 @@ function createMainWindow() {
 //Menus
 const menuArray = [
     {
-        label: "Agregar",
-        submenu: [
-            {
-                label: "Agregar producto",
-                accelerator: "Ctrl + N",
-                click() {
-                    addNewProductWindow()
-                }
-            }
-        ]
-    },
-    {
         label: "Refresh",
         submenu: [
             {
@@ -80,6 +65,18 @@ const menuArray = [
                 accelerator: "F5",
                 click() {
                     mainWindow.webContents.reload();
+                }
+            }
+        ]
+    },
+    {
+        label: "Agregar",
+        submenu: [
+            {
+                label: "Agregar producto",
+                accelerator: "Ctrl + N",
+                click() {
+                    addNewProductWindow()
                 }
             }
         ]

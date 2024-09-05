@@ -35,7 +35,7 @@ function printProducts(array) {
                     <td>${item.quantity}</td>
                     <td><strong style="color: green;">$</strong> ${item.price}</td>
                     <td id="btnContainer">
-                    <button class="edit-btn">Editar</button>
+                    <button id="${item.id}" class="edit-btn">Editar</button>
                     <button id="${item._id}" class="delete-btn">Eliminar</button>
                     </td>
                 </tr>
@@ -43,8 +43,24 @@ function printProducts(array) {
         // Insertamos el elemento en el DOM
         table.appendChild(tbody);
 
+        document.getElementById(`${item.id}`).addEventListener("click", () => openFloatWindow(item.id));
         document.getElementById(`${item._id}`).addEventListener("click", () => deleteProduct(item._id));
     });
+
+    function openFloatWindow(id) {
+        window.open(
+            './editProduct.html',
+            'ventanaFlotante',
+            `width: "100vh",
+          height: "100vh"`
+        );
+        fetch(`https://electron-app-inventario.onrender.com/product/${id}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log({data})
+            })
+            .catch((error) => console.error("Error al consultar los productos de la DB", error));
+    }
 
     function deleteProduct(id) {
         Swal.fire({

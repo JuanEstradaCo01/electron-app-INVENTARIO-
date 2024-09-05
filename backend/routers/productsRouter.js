@@ -49,6 +49,17 @@ productRouter.get("/product/:pid", async (req, res) => {
 productRouter.post("/editProduct/:pid", async (req, res) => {
     try{
         const pid = req.params.pid
+        const products = await productDao.getProducts();
+
+        const findProduct = products.find(item => item.id == pid)
+
+        if(!findProduct){
+            return res.status(404).json({
+                code: 404,
+                message: "No se encontró el producto"
+            })
+        }
+
         const { name, category, quantity, price } = req.body
 
         const product = {
@@ -58,7 +69,7 @@ productRouter.post("/editProduct/:pid", async (req, res) => {
             price: price
         }
 
-        await productDao.updateProduct(pid, product)
+        await productDao.updateProduct(findProduct._id, product)
 
         return res.status(200).json({
             code: 200,

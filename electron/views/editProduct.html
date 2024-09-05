@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar producto</title>
+</head>
+
+<body>
+
+    <h1>Editar productos</h1>
+    <p><strong>Nota:</strong> Se actualizaran solo los campos que se llenen.</p>
+    <form id="formAddProduct">
+        <label for="name">Nombre</label>
+        <input name="name" type="text" id="name" placeholder="Nombre del producto" autofocus>
+
+        <label for="type">Categoría</label>
+        <select id="category" name="type">
+            <option value="null" hidden selected>Selecciona una opción</option>
+            <option value="fruta">Fruta</option>
+            <option value="verdura">Verdura</option>
+            <option value="aseo">Aseo</option>
+            <option value="licor">Licor</option>
+            <option value="heladería">Heladería</option>
+        </select>
+
+        <label for="quantity">Cantidad</label>
+        <input type="number" name="quantity" id="quantity" placeholder="Cantidad de unidades">
+
+        <label for="price">Precio</label>
+        <input type="text" name="price" id="price" placeholder="Precio">
+
+        <button type="submit">Aceptar</button>
+    </form>
+</body>
+
+</html>
