@@ -1,14 +1,3 @@
-fetch(`https://electron-app-inventario.onrender.com/products`)
-    .then(response => response.json())
-    .then(data => {
-        if (data.products.length === 0) {
-            printNotExistsProducts();
-        } else {
-            printProducts(data.products);
-        }
-    })
-    .catch((error) => console.error("Error al consultar los productos de la DB", error));
-
 function printNotExistsProducts() {
     const products = document.getElementById("products")
 
@@ -48,34 +37,31 @@ function printProducts(array) {
     });
 
     function openFloatWindow(id) {
-        window.open(
+        const nuevaVentana = window.open(
             './editProduct.html',
-            'ventanaFlotante',
-            `width: "100vh",
-          height: "100vh"`
+            'width=800,height=600' 
         );
-        fetch(`https://electron-app-inventario.onrender.com/product/${id}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log({data})
-            })
-            .catch((error) => console.error("Error al consultar los productos de la DB", error));
-    }
 
-    function deleteProduct(id) {
-        Swal.fire({
-            title: "Advertencia",
-            text: `Esta accion es irrevesible`,
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Eliminar",
-            cancelButtonText: "Cancelar"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                fetch(`https://electron-app-inventario.onrender.com/deleteProduct/${id}`, {
-                    method: "DELETE",
+        nuevaVentana.onload = function () {
+            const form = nuevaVentana.document.getElementById("formEditProduct");
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const productName = nuevaVentana.document.querySelector("#name").value;
+                const category = nuevaVentana.document.querySelector("#category").value;
+                const quantity = nuevaVentana.document.querySelector("#quantity").value;
+                const price = nuevaVentana.document.querySelector("#price").value;
+
+                const update = {
+                    name: productName,
+                    category: category,
+                    quantity: quantity,
+                    price: price
+                };
+
+                fetch(`https://electron-app-inventario.onrender.com/editProduct/${id}`, {
+                    method: "POST",
+                    body: JSON.stringify(update),
                     headers: {
                         "Content-Type": "application/json",
                     },
@@ -83,21 +69,73 @@ function printProducts(array) {
                     .then((res) => res.json())
                     .then((data) => {
                         if (data.code !== 200) {
-                            Swal.fire({
-                                title: "Error",
+                            nuevaVentana.Toastify({
                                 text: `${data.message}`,
-                                icon: "error"
-                            });
+                                duration: 3000,
+                                gravity: "bottom",
+                                position: "rigth",
+                                stopOnFocus: false,
+                                style: {
+                                    background: "red",
+                                }
+                            }).showToast();
+                        } else {
+                            nuevaVentana.Toastify({
+                                text: `${data.message}`,
+                                duration: 3000,
+                                gravity: "bottom",
+                                position: "right",
+                                stopOnFocus: false,
+                                style: {
+                                    color: "white",
+                                    background: "rgb(0, 120, 45)",
+                                }
+                            }).showToast();
                         }
-
-                        Swal.fire({
-                            title: "Eliminado",
-                            text: `${data.message}`,
-                            icon: "success"
-                        });
                     })
                     .catch((error) => console.error("Error:", error));
-            }
-        });
+
+                form.reset();
+            });
+        };
     }
+}
+
+function deleteProduct(id) {
+    Swal.fire({
+        title: "Advertencia",
+        text: `Esta accion es irrevesible`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Eliminar",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`https://electron-app-inventario.onrender.com/deleteProduct/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.code !== 200) {
+                        Swal.fire({
+                            title: "Error",
+                            text: `${data.message}`,
+                            icon: "error"
+                        });
+                    }
+
+                    Swal.fire({
+                        title: "Eliminado",
+                        text: `${data.message}`,
+                        icon: "success"
+                    });
+                })
+                .catch((error) => console.error("Error:", error));
+        }
+    });
 };

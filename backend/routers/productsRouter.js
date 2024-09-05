@@ -43,7 +43,7 @@ productRouter.get("/product/:pid", async (req, res) => {
     }catch(e){
         return res.status(500).json({
             code: 500,
-            message: "Error al consultar el producto", e
+            message: "Error al consultar el producto",
         })
     }
 })
@@ -64,14 +64,18 @@ productRouter.post("/editProduct/:pid", async (req, res) => {
 
         const { name, category, quantity, price } = req.body
 
-        const product = {
+        let product = {
             name: name,
             category: category,
             quantity: quantity,
             price: price
         }
+        product.name = product.name.toUpperCase();
+        const format = new Intl.NumberFormat('de-DE');
+        const numberFormat = format.format(product.price);
+        product.price = numberFormat
 
-        //await productDao.updateProduct(findProduct._id, product)
+        await productDao.updateProduct(findProduct._id, product)
 
         return res.status(200).json({
             code: 200,

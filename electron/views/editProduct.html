@@ -4,14 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/addProduct.css">
+    <!--Toastify-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>Editar producto</title>
 </head>
 
 <body>
 
-    <h1>Editar productos</h1>
+    <h1>Editar producto</h1>
+
     <p><strong>Nota:</strong> Se actualizaran solo los campos que se llenen.</p>
-    <form id="formAddProduct">
+
+    <form id="formEditProduct">
         <label for="name">Nombre</label>
         <input name="name" type="text" id="name" placeholder="Nombre del producto" autofocus>
 
@@ -33,6 +38,9 @@
 
         <button type="submit">Aceptar</button>
     </form>
+    
 </body>
-
+<script src="./indexScript.js"></script>
+<!--Toastify-->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </html>

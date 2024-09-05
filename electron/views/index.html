@@ -30,6 +30,18 @@
         </table>
     </div>
 </body>
+<script>
+    fetch(`https://electron-app-inventario.onrender.com/products`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.products.length === 0) {
+            printNotExistsProducts();
+        } else {
+            printProducts(data.products);
+        }
+    })
+    .catch((error) => console.error("Error al consultar los productos de la DB", error));
+</script>
 <script src="./indexScript.js"></script>
 
 </html>
