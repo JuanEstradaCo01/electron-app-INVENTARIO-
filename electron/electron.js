@@ -20,7 +20,10 @@ function createMainWindow() {
     mainWindow = new BrowserWindow({
         title: "Inventario",
         width: 1000,
-        height: 700
+        height: 700,
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
 
     fetch(`https://electron-app-inventario.onrender.com/products`)

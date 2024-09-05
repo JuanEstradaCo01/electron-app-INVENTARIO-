@@ -22,6 +22,30 @@ productRouter.get("/products", async (req, res) => {
     }
 });
 
+productRouter.get("/product/:pid", async (req, res) => {
+    try{
+        const pid = req.params.pid
+        const product = await productDao.getProductById(pid)
+
+        if(!product){
+            return res.status(404).json({
+                code: 404,
+                message: "Producto no encontrado"
+            })
+        }
+
+        return res.status(200).json({
+            code: 200,
+            product: product
+        })
+    }catch(e){
+        return res.status(500).json({
+            code: 500,
+            message: "Error al consultar el producto", e
+        })
+    }
+})
+
 productRouter.post("/editProduct/:pid", async (req, res) => {
     try{
         const pid = req.params.pid

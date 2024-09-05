@@ -16,15 +16,38 @@ form.addEventListener("submit", async (e) => {
     }
 
     fetch(`https://electron-app-inventario.onrender.com/addProduct`, {
-        method: "POST", 
-        body: JSON.stringify(newProduct), 
+        method: "POST",
+        body: JSON.stringify(newProduct),
         headers: {
-          "Content-Type": "application/json",
+            "Content-Type": "application/json",
         },
-      })
+    })
         .then((res) => res.json())
         .then((data) => {
-            console.log({data})
+            if (data.code !== 201) {
+                Toastify({
+                    text: `${data.message}`,
+                    duration: 3000,
+                    gravity: "bottom",
+                    position: "rigth",
+                    stopOnFocus: false,
+                    style: {
+                        background: "red",
+                        white
+                    }
+                }).showToast();
+            }
+            Toastify({
+                text: `${data.message}`,
+                duration: 3000,
+                gravity: "bottom",
+                position: "rigth",
+                stopOnFocus: false,
+                style: {
+                    color: "white",
+                    background: "rgb(0, 120, 45)",
+                }
+            }).showToast();
         })
         .catch((error) => console.error("Error:", error));
 
