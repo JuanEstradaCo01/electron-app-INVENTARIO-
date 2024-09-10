@@ -20,7 +20,8 @@ function createMainWindow() {
     mainWindow = new BrowserWindow({
         title: "Inventario",
         width: 1000,
-        height: 700
+        height: 700,
+        icon: `./imgs/inventory-icon.png`
     });
 
     fetch(`https://electron-app-inventario.onrender.com/products`)
@@ -131,7 +132,7 @@ if (process.platform === "darwin") {
     })
 };
 
-if (process.env.NODE_ENV !== "production") {
+/*if (process.env.NODE_ENV !== "production") {
     menuArray.push({
         label: "Devtools",
         submenu: [
@@ -144,4 +145,4 @@ if (process.env.NODE_ENV !== "production") {
             }
         ]
     })
-};
+};*/
